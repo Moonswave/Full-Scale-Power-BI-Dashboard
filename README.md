@@ -1,2 +1,128 @@
-# Credit_Card_Financial_Dashboard
-Credit Card Transaction and Customer Dashboard using Power BI
+# SQL Database Creation and Data Import
+
+## Overview
+
+This project involves creating a SQL database and importing data from CSV files into two tables: `cc_detail` and `cust_detail`. The provided SQL script includes steps for creating the database, defining tables, importing data, and troubleshooting common issues related to date/time formats.
+
+## Steps
+
+1. **Create a Database**
+
+    ```sql
+    CREATE DATABASE ccdb;
+    ```
+
+2. **Create Tables**
+
+    - **cc_detail Table**
+
+        ```sql
+        CREATE TABLE cc_detail (
+            Client_Num INT,
+            Card_Category VARCHAR(20),
+            Annual_Fees INT,
+            Activation_30_Days INT,
+            Customer_Acq_Cost INT,
+            Week_Start_Date DATE,
+            Week_Num VARCHAR(20),
+            Qtr VARCHAR(10),
+            current_year INT,
+            Credit_Limit DECIMAL(10,2),
+            Total_Revolving_Bal INT,
+            Total_Trans_Amt INT,
+            Total_Trans_Ct INT,
+            Avg_Utilization_Ratio DECIMAL(10,3),
+            Use_Chip VARCHAR(10),
+            Exp_Type VARCHAR(50),
+            Interest_Earned DECIMAL(10,3),
+            Delinquent_Acc VARCHAR(5)
+        );
+        ```
+
+    - **cust_detail Table**
+
+        ```sql
+        CREATE TABLE cust_detail (
+            Client_Num INT,
+            Customer_Age INT,
+            Gender VARCHAR(5),
+            Dependent_Count INT,
+            Education_Level VARCHAR(50),
+            Marital_Status VARCHAR(20),
+            State_cd VARCHAR(50),
+            Zipcode VARCHAR(20),
+            Car_Owner VARCHAR(5),
+            House_Owner VARCHAR(5),
+            Personal_Loan VARCHAR(5),
+            Contact VARCHAR(50),
+            Customer_Job VARCHAR(50),
+            Income INT,
+            Cust_Satisfaction_Score INT
+        );
+        ```
+
+3. **Import Data from CSV Files**
+
+    Update the file names and locations as needed.
+
+    - **Import Data into `cc_detail` Table**
+
+        ```sql
+        COPY cc_detail
+        FROM 'D:\credit_card.csv' 
+        DELIMITER ',' 
+        CSV HEADER;
+        ```
+
+    - **Import Data into `cust_detail` Table**
+
+        ```sql
+        COPY cust_detail
+        FROM 'D:\customer.csv' 
+        DELIMITER ',' 
+        CSV HEADER;
+        ```
+
+4. **Troubleshooting Date/Time Format Errors**
+
+    If you encounter errors related to date/time fields, use the following steps:
+
+    - **Check the Data in Your CSV File**
+
+      Ensure date column values are formatted correctly (e.g., YYYY-MM-DD). Correct any invalid or missing date values.
+
+    - **Update Datestyle Setting**
+
+        ```sql
+        SET datestyle TO 'ISO, DMY';
+        ```
+
+5. **Insert Additional Data**
+
+    - **Import Additional Data into `cc_detail` Table**
+
+        ```sql
+        COPY cc_detail
+        FROM 'D:\cc_add.csv' 
+        DELIMITER ',' 
+        CSV HEADER;
+        ```
+
+    - **Import Additional Data into `cust_detail` Table**
+
+        ```sql
+        COPY cust_detail
+        FROM 'D:\cust_add.csv' 
+        DELIMITER ',' 
+        CSV HEADER;
+        ```
+
+## Notes
+
+- Make sure to update file paths to match your local file system.
+- Ensure that the CSV files are formatted correctly with headers and data types matching the table schemas.
+
+## Contact
+
+For any issues or questions, please contact [Your Name] at [Your Email].
+
