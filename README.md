@@ -1,4 +1,4 @@
-# SQL Database Creation and Data Import
+# Full-Scale Power BI Dashboard
 
 ## Overview
 
